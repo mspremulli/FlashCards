@@ -5,7 +5,8 @@ const userData = new mongoose.Schema({
         
     },
     userId:{
-
+        type: String,
+        required:true
     },
     password:{
         type: String,
@@ -17,4 +18,6 @@ const userData = new mongoose.Schema({
         match://
 
     }
-})
+});
+
+exports.userData = userData;
