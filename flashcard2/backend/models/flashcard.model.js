@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CardData = new mongoose.Schema({
+const cardData = new mongoose.Schema({
     id:{
         type:Number,
         required:true
@@ -20,4 +20,5 @@ const CardData = new mongoose.Schema({
 
 });
 
-module.exports = CardData;
+const Card = mongoose.model('Card', cardData)
+module.exports = Card;
