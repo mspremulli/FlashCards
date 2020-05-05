@@ -2,20 +2,38 @@ const express = require('express');
 const router = express.Router();
 let User = require('../models/user.model.js');
 
-router.get('/', (req,res,) => {
-    User.find({}, 'action')
-      .then(data => res.json(users))
-      .catch(err => res.status(400).json('Error',err))
+//request to retrieve users
+router.get('/', async(req,res,) => {
+  try{
+    const getUser = await User.find();
+    res.json(getUser);
+  }
+  catch{
+    res.json({message:err});
+  }
+    
+     
 });
 
-router.route('/add').post((req, res) => {
-    const username = req.body.username;
+//submit post to add a new user
+router.post('/add', async (req, res) => {
+    console.log(req.body);
 
-    const newUser = new User({username});
-    newUser.save()
-        .then(() => res.json('User added'))
-        .catch(err => res.status(400).json('Error',err))
-    
+    const newUser = new User({
+      username:req.body.username,
+      name:req.body.name,
+      email:req.body.email,
+      password:req.body.password
+    });
+
+    try{
+      const savedPost = await newUser.save();
+      res.json(savedPost);
+    }
+
+    catch(err){
+      res.json({message:err});
+    }
 });
 
 

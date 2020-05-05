@@ -1,22 +1,19 @@
 const mongoose = require('mongoose');
-const cardData = new mongoose.Schema({
-    id:{
-        type:Number,
-        required:true
-    },
+
+const Schema = mongoose.Schema;
+const cardData = new Schema({
+  
     title:{
         type:String,
-        required:true
+        required:true,
+        minlength:2
     },
     question:{
         type:String
     },
     answer:{
         type:String
-    },
-    hint:{
-        type:String
-    },
+    }
 
 });
 
