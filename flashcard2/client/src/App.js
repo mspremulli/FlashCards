@@ -1,12 +1,21 @@
 import React from 'react';
-import './App.css';
-import Flashcard from './components/Flashcard';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import AddFlashcard from './components/AddFlashcard';
+import FlashcardList from './components/FlashcardList';
+import Navbar from './components/Navbar';
+import CreateUser from './components/CreateUser';
 
 const App = () => {
-  return (
-    <div className="App">
-    <Flashcard />
-    </div>
+  return(
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route path = '/' exact component = {FlashcardList} >
+        </Route>
+        <Route path = '/add' exact component = {AddFlashcard} />
+        <Route path = '/user' exact component = {CreateUser} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
