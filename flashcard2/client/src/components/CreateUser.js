@@ -1,12 +1,37 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const CreateUser = (props) => {
-    return(
-        <div>
-        <h5>create user here</h5>
+  //input form to submit login email & password
+  return(
+    <div className = "center">
+      <form className = 'loginForm'>
+       <input
+          type="text"
+          id="email"
+          placeholder="Your email"
           
-        </div>
-    )
+          required
+        />
+        <input
+          type="text"
+          id="password"
+          placeholder="Enter password"
+          
+          required
+        />
+        <button>
+          Submit
+        </button>
+      </form>
+    </div>
+  )
 }
 
-export default CreateUser;
+const mapStoreToProps = (store) => {
+  return {
+    store
+  }
+}
+
+export default connect(mapStoreToProps)(CreateUser);

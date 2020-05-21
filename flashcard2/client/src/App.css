@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+.center {
+  justify-content: center;
+  align-items: center;
+  margin: 5% 40%;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-Content: center;
+  align-Items: center;
+  max-width: 200px;
+}
