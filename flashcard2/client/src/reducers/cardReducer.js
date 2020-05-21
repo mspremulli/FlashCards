@@ -1,4 +1,4 @@
-
+import {INIT, COUNT} from '../actions/type';
 
 const INITIAL_STORE = {
   cardList:[],
@@ -10,12 +10,14 @@ const INITIAL_STORE = {
 export default (store = INITIAL_STORE, action) =>{
   // console.log('action',action.payload);
   switch(action.type) {
-    case "INIT":
+    // initial case to load the questions
+    case INIT:
       return {
         ...store,
         cardList: action.payload
       }
-    case "COUNT":
+      // counter to test redux
+    case COUNT:
       return {
         ...store,
         count:action.payload

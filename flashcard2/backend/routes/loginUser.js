@@ -9,9 +9,6 @@ const auth = require('../middlewares/authUser.js');
 let User = require('../models/user.model.js');
 
 
-
-
-
 //request to login and authenticate a user
 router.post(
   '/', 
@@ -32,8 +29,6 @@ router.post(
       return res.status(400).json({errors:errors.array()});
     }
     
-    
-  
     const{email, password} = req.body;
     
     try{

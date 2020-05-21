@@ -23,17 +23,34 @@ const FlashcardList =(props) =>  {
       console.log('data not found')
     })
   }
+  
+  //should only run once, need to move somewhere else
+  getFlashcard();
 
-  // getFlashcard();
+  let localStyle = { 
+    show: {
+      opacity: "100"
+    },
+    hide: {
+      opacity: "0"
+    }
+    
+  }
 
+  //shows the answer
+  const showAnswer = () => {
+    console.log('show answer');
+  }
  
   //take the single cards and display a list of them all
-  //only show the answer that has been clicked
+  //only show the answer after it has been clicked
   const flashCardQuestions = props.cards.map(card => {
     return(
       <div key = {card._id}>
-        <li>{card.question}</li>
-        <li>{card.answer}</li> 
+        <li className = "singleCard">{card.question}</li>
+        <button onClick = {() => showAnswer()}>Show Answer</button>
+        <li className = " singleCard" style = {localStyle.show}>{card.answer}</li> 
+        <button>Next Question</button>
       </div>
     )
   })
@@ -41,7 +58,6 @@ const FlashcardList =(props) =>  {
     return (
     <div>
       {flashCardQuestions}
-      {props.count}
     </div>
     )
   
