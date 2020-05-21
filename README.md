@@ -33,6 +33,8 @@
 
 <ul>create user authentication with login/logout</ul>
 
+<ul>create an npm that loads both backend and frontend</ul>
+
 
 
 

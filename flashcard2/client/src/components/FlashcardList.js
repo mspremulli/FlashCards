@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {initCards, counter} from '../actions';
 import axios from 'axios';
 
-const FlashcardList =(props) =>  {
+
+//change back to class to use componentdidmount method??
+class FlashcardList extends Component  {
   
   //get the flashcard data from the backend
-  const getFlashcard = () => {
+  getFlashcard = () => {
     axios.get('http://localhost:5000/cards')
     .then((response) => {
       const data = response.data;
       // console.log('data',data);
 
 
-      props.initCards(data);
+      this.props.initCards(data);
      
      
       console.log('data recieved')
@@ -25,9 +27,11 @@ const FlashcardList =(props) =>  {
   }
   
   //should only run once, need to move somewhere else
-  getFlashcard();
+  componentDidMount(){
+    this.getFlashcard();
+  }
 
-  let localStyle = { 
+  localStyle = { 
     show: {
       opacity: "100"
     },
@@ -38,29 +42,31 @@ const FlashcardList =(props) =>  {
   }
 
   //shows the answer
-  const showAnswer = () => {
+  showAnswer = () => {
     console.log('show answer');
   }
+ render(){
+  const props = this.props;
  
   //take the single cards and display a list of them all
   //only show the answer after it has been clicked
-  const flashCardQuestions = props.cards.map(card => {
-    return(
-      <div key = {card._id}>
-        <li className = "singleCard">{card.question}</li>
-        <button onClick = {() => showAnswer()}>Show Answer</button>
-        <li className = " singleCard" style = {localStyle.show}>{card.answer}</li> 
-        <button>Next Question</button>
-      </div>
-    )
-  })
+    const flashCardQuestions = props.cards.map(card => {
+      return(
+        <div key = {card._id}>
+          <li className = "singleCard">{card.question}</li>
+          <button onClick = {() => this.showAnswer()}>Show Answer</button>
+          <li className = " singleCard" style = {this.localStyle.show}>{card.answer}</li> 
+          <button>Next Question</button>
+        </div>
+      )
+    })
 
-    return (
-    <div>
-      {flashCardQuestions}
-    </div>
-    )
-  
+      return (
+      <div>
+        {flashCardQuestions}
+      </div>
+      )
+  }
 }
 
 const mapStoreToProps = (store) => {
