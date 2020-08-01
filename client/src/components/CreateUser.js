@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {register} from '../actions/register';
+import {register, login} from '../actions/register';
 
-const CreateUser = (props) => {
+const CreateUser = ({name, email, password}) => {
 
   //runs the validators in the backend when login is clicked
   const handleLogin = () => {
@@ -37,7 +37,7 @@ const CreateUser = (props) => {
           Login
         </button>
         <br />
-        <button onClick = {() => handleSignin}>
+        <button onClick = {() => handleSignup}>
           Sign up 
         </button>
 
