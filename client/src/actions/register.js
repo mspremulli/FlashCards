@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   REGISTER_FAIL,
   REGISTER_GOOD,
-  USER_LOADED
+  USER_LOADED,
 } from './type';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -21,21 +21,22 @@ export const loadUser = () => async dispatch => {
 
   } catch (err) {
     dispatch({
-      type: Audio
+      type: REGISTER_FAIL
     });
   }
 
 }
 
 //Register User
-export const register = ({name, email, password}) => async dispatch => {
+export const register = ({email, password}) => async dispatch => {
+  console.log('register started');
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
 
-  const body = JSON.stringify({name, email, password});
+  const body = JSON.stringify({email, password});
     
     try {
       const res = await axios.post('/api/users', body, config);
