@@ -32,4 +32,4 @@ app.get('/', (req, res) => {
 
 
 //open port
- app.listen(port, () => console.log('port is open on',port));
+ app.listen(port, () => console.log('port is open on', port));
