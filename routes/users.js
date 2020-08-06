@@ -13,24 +13,28 @@ let User = require('../models/User.js');
 //@access Public
 router.post(
   '/', 
-  //validate data
-  // [
-  //   check(
-  //     'email',
-  //     'please incluse valid email'
-  //   ).isEmail(),
-  //   check(
-  //     'password',
-  //     'please enter a password with 6 or more characters'
-  //   ).exists(),
-  // ],
+  // validate data
+  [
+    check(
+      'email',
+      'please incluse valid email'
+    ).isEmail(),
+    check(
+      'password',
+      'please enter a password with 6 or more characters'
+    ).exists(),
+    check(
+      'password',
+      'please enter a password with 6 or more characters'
+    ).isLength(5),
+  ],
   async (req, res) => {
-    // const errors = validationResult(req);
-    // if(!errors.isEmpty()){
-    //   return res.status(400).json({errors:errors.array()});
-    // }
-    
-    
+    // console.log('registering started...');
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(400).json({errors:errors.array()});
+    }
+        
     try{
       let userData = {
         email: req.body.email,
@@ -38,16 +42,16 @@ router.post(
       };
 
       console.log(userData);
-      // let {email, password} = userData;
-      // // see if user exists. send error if they do not exist
-      // let user = await User.findOne({email: email});
-      // if(!user){
-      //   //make message more vauge later for better security
-      //   res.status(400).json({errors:[{msg:'email is not in database'}] });
-      // }
+      let {email, password} = userData;
+      // see if user exists. send error if they do exist
+      let user = await User.findOne({email: email});
+      if(user){
+        //make message more vauge later for better security
+        return res.status(400).json({errors:[{msg:'email is already in use'}] });
+      }
       
-      // const salt = await bcrpyt.genSalt(10);
-      // password = await bcrpyt.hash(password, salt);
+      const salt = await bcrpyt.genSalt(10);
+      password = await bcrpyt.hash(password, salt);
 
       const newUser = await User.create(userData);
       console.log('newuser:', newUser);
@@ -55,7 +59,7 @@ router.post(
 
     } 
     catch(err){
-      console.error(err.message);
+      console.error('register error', err.message);
       res.status(500).send('Server Error');
     }
 

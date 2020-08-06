@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {register, login} from '../actions/register';
 
-const CreateUser = (props) => {
+const CreateUser = ({register, login}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,4 +56,4 @@ const CreateUser = (props) => {
 //map the login credentials to redux
 const mapStoreToProps = () => {}
 
-export default connect(mapStoreToProps)(CreateUser);
+export default connect(mapStoreToProps,{register, login})(CreateUser);
