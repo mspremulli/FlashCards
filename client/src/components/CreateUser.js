@@ -18,7 +18,7 @@ const CreateUser = ({register, login}) => {
     const data = new FormData(e.target);
     setEmail(data.get('email'));
     setPassword(data.get('password'));
-    console.log(email, password);
+    // console.log(email, password);
     register({email, password});
   } 
   //input form to submit login email & password
