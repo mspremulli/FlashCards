@@ -4,7 +4,8 @@ import AddFlashcard from './components/AddFlashcard';
 import './App.css';
 import FlashcardList from './components/FlashcardList';
 import Navbar from './components/Navbar';
-import CreateUser from './components/CreateUser';
+import RegisterUser from './components/RegisterUser';
+import LoginUser from './components/RegisterUser';
 
 const App = () => {
   return(
@@ -13,7 +14,8 @@ const App = () => {
       <Switch>
         <Route path = '/' exact component = {FlashcardList} />
         <Route path = '/add' exact component = {AddFlashcard} />
-        <Route path = '/user' exact component = {CreateUser} />
+        <Route path = '/login' exact component = {LoginUser} />
+        <Route path = '/register' exact component = {RegisterUser} />
       </Switch>
     </BrowserRouter>
   );
