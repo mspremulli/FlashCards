@@ -18,7 +18,7 @@ const RegisterUser = ({register}) => {
   } 
   //input form to submit login email & password
   return(
-    <div className = "center">
+    <div className = "loginForm">
       <form onSubmit =  {(e) => handleSignup(e)}>
       <input
           type = "text"

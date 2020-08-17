@@ -19,7 +19,7 @@ const LoginUser = ({login}) => {
   } 
   //input form to submit login email & password
   return(
-    <div className = "center">
+    <div className = "loginForm">
       <form onSubmit =  {(e) => Login(e)}>
       <input
           type = "text"
