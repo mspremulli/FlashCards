@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {initCards} from '../actions';
 import axios from 'axios';
 
-const FlashcardList = ({cards}) =>  {
+const FlashcardList = ({cards, initCards}) =>  {
 
 //   const [showResults, setShowResults] = React.useState(false)
 //   const onClick = () => setShowResults(true)
@@ -25,7 +25,7 @@ const getFlashcard = () => {
   axios.get('http://localhost:5000/cards')
   .then((response) => {
     const data = response.data;
-    this.props.initCards(data);
+    initCards(data);
     
     console.log('data recieved');
   })
@@ -41,7 +41,6 @@ const [cardIndex, setCardIndex] = useState(0);
 useEffect(() => {
  getFlashcard();
 });
-
 
   
   //shows the answer
@@ -60,24 +59,22 @@ useEffect(() => {
     console.log(cardIndex);
   }
 
-//   const cards = props.cards;
-//   //take the single cards and display a list of them all
-//   //only show the answer after it has been clicked
-//   const flashCardQuestions = cards.map(card => {
-//     return(
-//       <div key = {card._id}>
-//         <li className = "singleCard">{card.question}</li>
-//         <button onClick = {() => showAnswer()}>Show Answer</button>
-//         <li className = " singleCard" >{card.answer}</li> 
-//         <button onClick = {() => nextQuestion()}>Next Question</button>
-//       </div>
-//     )
-//   });
+  //take the single cards and display a list of them all
+  //only show the answer after it has been clicked
+  const flashCardQuestions = cards.map(card => {
+    return(
+      <div key = {card._id}>
+        <li className = "singleCard">{card.question}</li>
+        {/* <button onClick = {() => showAnswer()}>Show Answer</button> */}
+        {/* <li className = " singleCard" >{card.answer}</li>  */}
+        {/* <button onClick = {() => nextQuestion()}>Next Question</button> */}
+      </div>
+    )
+  });
 
   return (
   <div>
-   {cardIndex}
-   {getFlashcard}
+   {flashCardQuestions[cardIndex]}
    <button onClick = {() => nextQuestion()}>Next Question</button>
   </div>
   )
