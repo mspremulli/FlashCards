@@ -4,49 +4,30 @@ import {initCards} from '../actions';
 import axios from 'axios';
 
 const FlashcardList = ({cards, initCards}) =>  {
-
-//   const [showResults, setShowResults] = React.useState(false)
-//   const onClick = () => setShowResults(true)
-//   return (
-//     <div>
-//       <input type="submit" value="Search" onClick={onClick} />
-//       { showResults ? <Results /> : null }
-//     </div>
-//   )
-// }
-
-// const Results = () => (
-//   <div id="results" className="search-results">
-//     Some Results
-//   </div>
-// )
-
-const getFlashcard = () => {
-  axios.get('http://localhost:5000/cards')
-  .then((response) => {
-    const data = response.data;
-    initCards(data);
-    
-    console.log('data recieved');
-  })
-  .catch(() => {
-    console.log('data not found');
-  })
-}
-
-const [cardIndex, setCardIndex] = useState(0);
-
-//get the flashcard data from the backend
-// const [cards, setCards] = useState(0);
-useEffect(() => {
- getFlashcard();
-});
-
-  
-  //shows the answer
-  const showAnswer = () => {
-
+  //get the flashcard data from the backend
+  const getFlashcard = () => {
+    axios.get('http://localhost:5000/cards')
+    .then((response) => {
+      const data = response.data;
+      initCards(data);
+      
+      console.log('data recieved');
+    })
+    .catch(() => {
+      console.log('data not found');
+    })
   }
+
+  const [cardIndex, setCardIndex] = useState(0);
+  useEffect(() => {
+    getFlashcard();
+  }, []);
+
+  const [showAnswer, setShowAnswer] = useState(0);
+  
+  useEffect(() =>{
+    myStyle= {opacity:100};
+  },[showAnswer])
 
   //look at next question. loop back to begining if at end
   const nextQuestion = () => {
@@ -56,18 +37,17 @@ useEffect(() => {
     else{
       setCardIndex(0);
     }
-    console.log(cardIndex);
   }
 
   //take the single cards and display a list of them all
   //only show the answer after it has been clicked
+  let myStyle= {opacity:0};
+
   const flashCardQuestions = cards.map(card => {
     return(
       <div key = {card._id}>
         <li className = "singleCard">{card.question}</li>
-        {/* <button onClick = {() => showAnswer()}>Show Answer</button> */}
-        {/* <li className = " singleCard" >{card.answer}</li>  */}
-        {/* <button onClick = {() => nextQuestion()}>Next Question</button> */}
+        <li className = " singleCard" style = {myStyle} >{card.answer}</li> 
       </div>
     )
   });
@@ -75,6 +55,7 @@ useEffect(() => {
   return (
   <div>
    {flashCardQuestions[cardIndex]}
+   <button onClick = {() => setShowAnswer(true)}>Show Answer</button>
    <button onClick = {() => nextQuestion()}>Next Question</button>
   </div>
   )
