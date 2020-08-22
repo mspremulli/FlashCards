@@ -23,14 +23,11 @@ const FlashcardList = ({cards, initCards}) =>  {
     getFlashcard();
   }, []);
 
-  const [showAnswer, setShowAnswer] = useState(0);
+  const [myStyle, setMyStyle] = useState({opacity:0});
   
-  useEffect(() =>{
-    myStyle= {opacity:100};
-  },[showAnswer])
-
   //look at next question. loop back to begining if at end
   const nextQuestion = () => {
+    setMyStyle({opacity:0})
     if(cardIndex + 1 < cards.length){
       setCardIndex(cardIndex + 1)
     }
@@ -41,9 +38,7 @@ const FlashcardList = ({cards, initCards}) =>  {
 
   //take the single cards and display a list of them all
   //only show the answer after it has been clicked
-  let myStyle= {opacity:0};
-
-  const flashCardQuestions = cards.map(card => {
+    const flashCardQuestions = cards.map(card => {
     return(
       <div key = {card._id}>
         <li className = "singleCard">{card.question}</li>
@@ -53,13 +48,12 @@ const FlashcardList = ({cards, initCards}) =>  {
   });
 
   return (
-  <div>
-   {flashCardQuestions[cardIndex]}
-   <button onClick = {() => setShowAnswer(true)}>Show Answer</button>
-   <button onClick = {() => nextQuestion()}>Next Question</button>
-  </div>
+    <div>
+    {flashCardQuestions[cardIndex]}
+    <button onClick = {() => setMyStyle({opacity:100})}>Show Answer</button>
+    <button onClick = {() => nextQuestion()}>Next Question</button>
+    </div>
   )
-  
 }
 
 const mapStoreToProps = (store) => {
