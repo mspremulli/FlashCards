@@ -1,16 +1,10 @@
 import React from 'react';
-import Input from './Input';
-
-//allows the user to add a new flashcard to a collection
-
+//allows the user to add a new flashcard to a coll
 const AddFlashcard = (props) =>  {
 
-  
+  const handleSubmit = () => {
 
-const handleSubmit = () => {
-
-}
-
+  }
 
   return(
     <div>

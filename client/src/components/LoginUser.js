@@ -21,11 +21,11 @@ const LoginUser = ({login}) => {
   return(
     <div className = "loginForm">
       <form onSubmit =  {(e) => Login(e)}>
-      <input
+        <input
           type = "text"
           id = "email"
           name = 'email'
-          placeholder = "Your email"
+          placeholder = "Your email here"
           required
         />
         <input
@@ -39,7 +39,6 @@ const LoginUser = ({login}) => {
         <button >
           Login
         </button>
-
       </form>
     </div>
     )

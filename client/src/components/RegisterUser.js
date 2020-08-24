@@ -20,7 +20,7 @@ const RegisterUser = ({register}) => {
   return(
     <div className = "loginForm">
       <form onSubmit =  {(e) => handleSignup(e)}>
-      <input
+        <input
           type = "text"
           id = "email"
           name = 'email'
@@ -36,9 +36,8 @@ const RegisterUser = ({register}) => {
         />
         <br />
         <button >
-          Sign up 
+          Sign up
         </button>
-
       </form>
     </div>
     )

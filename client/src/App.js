@@ -5,7 +5,7 @@ import './App.css';
 import FlashcardList from './components/FlashcardList';
 import Navbar from './components/Navbar';
 import RegisterUser from './components/RegisterUser';
-import LoginUser from './components/RegisterUser';
+import LoginUser from './components/LoginUser';
 
 const App = () => {
   return(

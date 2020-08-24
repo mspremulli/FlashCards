@@ -66,4 +66,54 @@ router.post(
   }
 );
 
+// @route		PUT api/users
+// @desc		login route
+// @access	public
+router.put(
+  "/login",
+//validate here later
+  async (req, res) => {
+    //check validation errors later
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
+
+    try {
+      const user = await User.findOne({email: req.body.email});
+
+      if (isEmpty(user)) {
+        //fix error messages later to improve security
+        return res.status(400).json({errors: {message: "login not in database"} });
+      }
+
+      const passwordsMatch = await bcrypt.compare(req.body.password, user.password);
+
+      
+      if (!passwordsMatch) {
+        //fix error messages later to improve security
+        return res.status(400).json({ errors: { message: "wrong password" } });
+      }
+
+      User.findByIdAndUpdate(user.id);
+
+      const payload = {
+        id: user._id,
+        email: user.email,
+      };
+
+      const token = jwt.sign(payload, config.jwtSecret, {});
+
+      res.json(token);
+    } 
+    catch (error) {
+      console.error(error);
+      return res.status(500).json(error);
+    }
+  }
+  
+);
+
+
+
 module.exports = router;
